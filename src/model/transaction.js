@@ -54,9 +54,17 @@ const insertTransaction = ({ idProduct, idUser }) => {
   })
 }
 
-const updateTransaction = (id) => {
+const updateTransaction = (idProduct, idUser, status, id) => {
   return new Promise((resolve, reject) => {
-    pool.query('UPDATE transaction')
+    pool.query('UPDATE transaction SET(id_product, id_user, status)VALUE($1, $2, $3) WHERE id = $4',
+      [idProduct, idUser, status, id],
+      (err, result) => {
+        if (!err) {
+          resolve(result)
+        } else {
+          reject(new Error(err))
+        }
+      })
   })
 }
 

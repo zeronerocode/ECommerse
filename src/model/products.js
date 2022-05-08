@@ -47,6 +47,21 @@ const insertProduct = ({ name, description, stock, price, idCategory, createdAt 
   })
 }
 
+const updateProduct = (data, id) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      'UPDATE product SET (name, description, stock, price, id_category, update_at) VALUE VALUES($1, $2, $3, $4, $5, $6) WHERE id = $8',
+      [data, id],
+      (err, result) => {
+        if (!err) {
+          resolve(result)
+        } else {
+          reject(new Error(err))
+        }
+      })
+  })
+}
+
 const countProduct = () => {
   return pool.query('SELECT COUNT(*) AS total FROM products')
 }
@@ -55,5 +70,6 @@ module.exports = {
   getProductById,
   getAllProduct,
   insertProduct,
-  countProduct
+  countProduct,
+  updateProduct
 }

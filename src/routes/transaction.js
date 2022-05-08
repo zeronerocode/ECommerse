@@ -6,5 +6,7 @@ router
   .get('/:id', transactionController.getTransactionById)
   .get('/', transactionController.getAllTransaction)
   .post('/', transactionController.insertTransaction)
+  .patch('/:id', transactionController.updateTransaction)
+  .delete('/:id', transactionController.deleteTransaction)
 
 module.exports = router

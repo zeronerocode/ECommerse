@@ -79,9 +79,25 @@ const deleteTransaction = (req, res, next) => {
     })
 }
 
+const updateTransaction = (req, res, next) => {
+  const id = req.params.id
+  const { idProduct, idUser, status } = req.body
+  transactionModel.updateTransaction(idProduct, idUser, status, id)
+    .then(() => {
+      res.status(201).json({
+        idProduct, idUser, status
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+      next(new createError.InternalServerError())
+    })
+}
+
 module.exports = {
   getTransactionById,
   getAllTransaction,
   insertTransaction,
-  deleteTransaction
+  deleteTransaction,
+  updateTransaction
 }

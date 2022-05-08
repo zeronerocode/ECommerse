@@ -68,7 +68,7 @@ const insertProduct = (req, res, next) => {
     })
 }
 
-const updateProducts = (req, res, next) => {
+const updateProduct = (req, res, next) => {
   const id = req.params.id
   const { name, description, price, stock, idCategory } = req.body
   const data = {
@@ -79,7 +79,7 @@ const updateProducts = (req, res, next) => {
     idCategory,
     createdAt: new Date()
   }
-  productModel.updateCategory(data, id)
+  productModel.updateProduct(data, id)
     .then(() => {
       res.status(201).json({
         data
@@ -110,5 +110,5 @@ module.exports = {
   getAllProduct,
   insertProduct,
   deleteProduct,
-  updateProducts
+  updateProduct
 }
